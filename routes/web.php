@@ -3,29 +3,21 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
-use App\Models\Post;
 
 Route::get('/', HomeController::class);
+// //Exceptuar una ruta:
+// Route::resource('posts', PostController::class)->except('destroy');
 
-Route::get('/posts',[PostController::class,'index'])->name('posts.index');
-Route::get('/posts/create', [PostController::class,'create'])->name('posts.create');
-Route::post('/posts', [PostController::class,'store'])->name('posts.store');
-Route::get('/posts/{post}',[PostController::class,'show'])->name('posts.show');
-Route::get('/posts/{post}/edit',[PostController::class,'edit'])->name('posts.edit');
-Route::put('/posts/{post}',[PostController::class,'update'])->name('posts.update');
-Route::delete('/posts/{post}',[PostController::class,'destroy'])->name('posts.destroy');
+// //Exceptuar mas de una ruta:
+// Route::resource('posts', PostController::class)->except(['destroy','edit']);
 
+// //Selecionar solo las rutas que queremos usar:
+// Route::resource('posts', PostController::class)->only(['index','create','store']);
 
-Route::get('prueba', function (){
-    
-    $post = new Post();
-    $post->title = 'Titulo 3';
-    $post->content = 'Contenido 3';
-    $post->categoria = 'Categoria 3';
-    $post->is_active = 0;
-    $post->save();
+// //Forma para cambiar la url pero mantener los nombres de las rutas y las variables
+// Route::resource('articulos', PostController::class)->parameters(['articulos' => 'post'])->names('posts');
 
-    return $post;
+// //Para crear apis, no vamos a necesitar las vistas
+// Route::apiResource('posts', PostController::class);
 
-    // dd($post->is_active);
-});
+Route::resource('posts', PostController::class);
