@@ -6,10 +6,17 @@
     <title>Laravel | Posts</title>
 </head>
 <body>
-    <h1>Aqui se muestra el Post {{ $post }}</h1>
-
-    @if (false)
-        <p>Contenido de prueba</p>    
-    @endif
+    <a href="{{route('posts.index')}}">Volver a posts</a>
+    <h1>Titulo: {{ $post->title }}</h1>
+    <p>Categoria: {{ $post->category }} </p>
+    <p>Contenido: {{ $post->content }} </p>
+    <a href="{{route('posts.edit',$post)}}">
+        Editar Post
+    </a>
+    <form action="{{route('posts.destroy',$post)}}" method="POST">
+        @csrf
+        @method('DELETE')
+        <button type="submit">Eliminar Post</button>
+    </form>
 </body>
 </html>
