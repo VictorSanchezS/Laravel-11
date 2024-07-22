@@ -10,6 +10,11 @@
         </label>
         <br><br>
         <label for="">
+            Slug
+            <input type="text" name="slug" value="{{ $post->slug }}">
+        </label>
+        <br><br>
+        <label for="">
             Categoria
             <input type="text" name="category" value="{{ $post->category }}">
         </label>

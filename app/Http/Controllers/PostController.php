@@ -21,36 +21,34 @@ class PostController extends Controller
     public function store(Request $request){
         $post = new Post();
         $post->title = $request->title;
+        $post->slug = $request->slug;
         $post->category = $request->category;
         $post->content = $request->content;
         $post->save();
-        return redirect('/posts');
+        return redirect()->route('posts.index');
     }
 
-    public function show($post){
-        $post = Post::find($post);
+    public function show(Post $post){
         return view('posts.show',compact('post'));
     }
 
-    public function edit($post){
-        $post = Post::find($post);
+    public function edit(Post $post){
         return view('posts.edit',compact('post'));
     }
 
-    public function update(Request $request,$post)
+    public function update(Request $request,Post $post)
     {
-        $post = Post::find($post);
         $post->title = $request->title;
+        $post->slug = $request->slug;
         $post->category = $request->category;
         $post->content = $request->content;
         $post->save();
-        return redirect("/posts/{$post->id}");
+        return redirect()->route('posts.show',$post);
     }
 
-    public function destroy($post){
-        $post = Post::find($post);
+    public function destroy(Post $post){
         $post->delete();
-        return redirect('/posts');
+        return redirect()->route('posts.index');
     }
 
 }
