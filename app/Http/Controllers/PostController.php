@@ -19,12 +19,13 @@ class PostController extends Controller
     }
 
     public function store(Request $request){
-        $post = new Post();
-        $post->title = $request->title;
-        $post->slug = $request->slug;
-        $post->category = $request->category;
-        $post->content = $request->content;
-        $post->save();
+        // $post = new Post();
+        // $post->title = $request->title;
+        // $post->slug = $request->slug;
+        // $post->category = $request->category;
+        // $post->content = $request->content;
+        // $post->save();
+        Post::create($request->all());
         return redirect()->route('posts.index');
     }
 
@@ -38,11 +39,12 @@ class PostController extends Controller
 
     public function update(Request $request,Post $post)
     {
-        $post->title = $request->title;
-        $post->slug = $request->slug;
-        $post->category = $request->category;
-        $post->content = $request->content;
-        $post->save();
+        // $post->title = $request->title;
+        // $post->slug = $request->slug;
+        // $post->category = $request->category;
+        // $post->content = $request->content;
+        // $post->save();
+        $post->update($request->all());
         return redirect()->route('posts.show',$post);
     }
 

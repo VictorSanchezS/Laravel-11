@@ -12,6 +12,12 @@ class Post extends Model
 
     protected $table = 'posts';
 
+    protected $fillable = ['title', 'slug', 'category', 'content']; // Indica que campos se deben guardar
+
+    protected $guarded = [ // Indica que campo se debe ignorar al momento de guardar
+        'is_active',
+    ];
+
     protected function casts(): array
     {
         return [
