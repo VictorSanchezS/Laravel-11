@@ -19,12 +19,12 @@ class PostController extends Controller
     }
 
     public function store(Request $request){
-        // $post = new Post();
-        // $post->title = $request->title;
-        // $post->slug = $request->slug;
-        // $post->category = $request->category;
-        // $post->content = $request->content;
-        // $post->save();
+        $request->validate([
+            'title' => ['required','string','max:255'],
+            'slug' => ['required','string','max:255','unique:posts,slug'],
+            'category' => ['required','string','max:255'],
+            'content' => ['required','string'],
+        ]);
         Post::create($request->all());
         return redirect()->route('posts.index');
     }
@@ -39,11 +39,12 @@ class PostController extends Controller
 
     public function update(Request $request,Post $post)
     {
-        // $post->title = $request->title;
-        // $post->slug = $request->slug;
-        // $post->category = $request->category;
-        // $post->content = $request->content;
-        // $post->save();
+        $request->validate([
+            'title' => ['required','string','max:255'],
+            'slug' => ['required','string','max:255',"unique:posts,slug,{$post->id}"],
+            'category' => ['required','string','max:255'],
+            'content' => ['required','string'],
+        ]);
         $post->update($request->all());
         return redirect()->route('posts.show',$post);
     }
