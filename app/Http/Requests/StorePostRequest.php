@@ -29,23 +29,4 @@ class StorePostRequest extends FormRequest
         ];
     }
 
-    public function messages() : array
-    {
-        return [
-            'title.required' => 'El campo :attribute es requerido',
-            'slug.required' => 'El campo :attribute es requerido',
-            'category.required' => 'El campo :attribute es requerido',
-            'content.required' => 'El campo :attribute es requerido',
-        ];
-    }
-
-    public function attributes() : array
-    {
-        return [
-            'title' => 'Título',
-           'slug' => 'Slug',
-            'category' => 'Categoría',
-            'content' => 'Contenido',
-        ];
-    }
 }
