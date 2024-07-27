@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePostRequest;
+use App\Mail\PostCreatedMail;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class PostController extends Controller
 {
@@ -26,7 +28,11 @@ class PostController extends Controller
         //     'category' => ['required','string','max:255'],
         //     'content' => ['required','string'],
         // ]);
-        Post::create($request->all());
+
+        $post = Post::create($request->all());
+
+        Mail::to('prueba@gmail.com')->send(new PostCreatedMail($post));
+
         return redirect()->route('posts.index');
     }
 
